@@ -1,13 +1,12 @@
-import kaplay from "kaplay";
-import "kaplay/global";
+import kaplay from 'kaplay'
+import { loadAtlasData } from './util'
 
-const k = kaplay()
+const data = await loadAtlasData('sprites/ships_sheet.xml')
+const k = window.k = kaplay({ background: '#006994' })
 
-k.loadSprite("bean", "sprites/bean.png")
+k.loadSpriteAtlas('sprites/ships_sheet.png', data)
 
 k.add([
-	k.pos(120, 80),
-	k.sprite("bean"),
+  k.pos(120, 80),
+  k.sprite('ship (1)')
 ])
-
-k.onClick(() => k.addKaboom(k.mousePos()))
