@@ -13,11 +13,15 @@ k.scene('main', () => {
     k.pos(destPos),
     k.sprite('ship (1)'),
     k.area(),
-    k.rotate()
+    k.rotate(),
+    k.anchor('center')
   ])
 
   ship.onUpdate(() => {
-    ship.angle = ship.pos.angle(destPos) + 90
+    const destAngle = ship.pos.angle(destPos) + 90
+    const delta = destAngle - ship.angle
+
+    ship.angle += delta * k.dt()
   })
 
   k.onMousePress(() => {
