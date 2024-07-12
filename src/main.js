@@ -33,8 +33,11 @@ k.scene('main', () => {
   })
 
   k.loop(3, () => {
+    const edge = k.choose([k.UP, k.RIGHT, k.DOWN, k.LEFT])
+    const pos = k.rand(k.vec2(k.width(), k.height()))
+
     const enemy = spawnShip([
-      k.pos(k.rand(k.vec2(k.width(), k.height()))),
+      k.pos(pos.scale(edge)),
       k.sprite('ship (2)'),
       k.offscreen({ destroy: true }),
       'enemy'
