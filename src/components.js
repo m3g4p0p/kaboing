@@ -24,3 +24,21 @@ export function towards (pos) {
     }
   }
 }
+
+/**
+ * @returns {import('kaplay').Comp}
+ */
+export function vanish () {
+  return {
+    id: 'vanish',
+    require: ['opacity'],
+
+    update () {
+      this.opacity -= Math.min(k.dt(), this.opacity)
+
+      if (this.opacity === 0) {
+        this.destroy()
+      }
+    }
+  }
+}
