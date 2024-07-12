@@ -5,9 +5,15 @@ import { k } from './setup'
  * @returns {import('kaplay').Comp}
  */
 export function towards (pos) {
+  const start = new k.Vec2()
+
   return {
     id: 'towards',
     require: ['pos', 'rotate'],
+
+    add () {
+      Object.assign(start, this.pos)
+    },
 
     update () {
       const dt = k.dt()

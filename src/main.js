@@ -33,6 +33,10 @@ k.scene('main', () => {
   })
 
   k.loop(3, () => {
+    if (k.get('enemy').length > 5) {
+      return
+    }
+
     const edge = k.choose([k.UP, k.RIGHT, k.DOWN, k.LEFT])
     const pos = k.rand(k.vec2(k.width(), k.height()))
 
@@ -44,7 +48,7 @@ k.scene('main', () => {
     ])
 
     enemy.onUpdate(() => {
-      if (!enemy.is(['sink', 'towards'])) {
+      if (!enemy.is(['vanish', 'towards'])) {
         enemy.use(towards(player.pos))
       }
     })
