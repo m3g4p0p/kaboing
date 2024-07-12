@@ -2,6 +2,10 @@ import { vanish, towards } from './components'
 import { k } from './setup'
 import { spawnShip } from './spawn'
 
+k.scene('start', () => {
+  k.onMousePress(() => k.go('main'))
+})
+
 k.scene('main', () => {
   k.layers(['below', 'above'], 'above')
 
@@ -41,4 +45,4 @@ k.scene('main', () => {
   })
 })
 
-k.go('main')
+k.go('start')
