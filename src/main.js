@@ -1,13 +1,19 @@
 import { towards } from './components'
 import { k } from './setup'
 
-k.scene('main', () => {
-  const ship = k.add([
-    k.pos(k.width() / 2, k.height() / 2),
-    k.sprite('ship (1)'),
+function spawn (components) {
+  return k.add([
     k.area(),
     k.rotate(),
-    k.anchor('center')
+    k.anchor('center'),
+    ...components
+  ])
+}
+
+k.scene('main', () => {
+  const ship = spawn([
+    k.pos(k.width() / 2, k.height() / 2),
+    k.sprite('ship (1)')
   ])
 
   k.onMousePress(() => {

@@ -15,6 +15,10 @@ export function towards (pos) {
       const delta = destAngle - this.angle
       const distance = pos.sub(this.pos)
 
+      if (distance.dist() < 10) {
+        this.unuse('towards')
+      }
+
       this.pos = this.pos.add(distance.scale(dt))
       this.angle += delta * dt
     }
