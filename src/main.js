@@ -32,7 +32,7 @@ k.scene('main', () => {
     }
   })
 
-  k.loop(3, () => {
+  k.loop(1, function spawnEnemy () {
     if (k.get('enemy').length > 5) {
       return
     }
@@ -43,7 +43,7 @@ k.scene('main', () => {
     const enemy = spawnShip([
       k.pos(pos.scale(edge)),
       k.sprite('ship (2)'),
-      k.offscreen({ destroy: true }),
+      k.offscreen({ destroy: true, distance: 300 }),
       'enemy'
     ])
 
@@ -52,6 +52,8 @@ k.scene('main', () => {
         enemy.use(towards(player.pos))
       }
     })
+
+    enemy.onDestroy(spawnEnemy)
   })
 })
 

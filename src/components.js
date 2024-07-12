@@ -25,7 +25,7 @@ export function towards (pos) {
         this.unuse('towards')
       }
 
-      this.pos = this.pos.add(distance.scale(dt))
+      this.pos = this.pos.add(distance.scale(dt / 2))
       this.angle += delta * dt
     }
   }
