@@ -22,10 +22,6 @@ k.scene('main', () => {
   })
 
   k.loop(3, () => {
-    if (k.get('enemy').length > 2) {
-      return
-    }
-
     const enemy = spawn([
       k.pos(k.rand(k.vec2(k.width(), k.height()))),
       k.sprite('ship (2)'),
@@ -37,6 +33,8 @@ k.scene('main', () => {
         enemy.use(towards(player.pos))
       }
     })
+
+    enemy.onCollide('enemy', k.destroy)
   })
 })
 
