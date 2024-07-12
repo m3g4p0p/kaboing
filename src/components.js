@@ -31,10 +31,11 @@ export function towards (pos) {
 export function vanish () {
   return {
     id: 'vanish',
-    require: ['opacity'],
+    require: ['color', 'opacity'],
 
     update () {
       this.opacity -= Math.min(k.dt(), this.opacity)
+      this.color = k.BLACK.lerp(k.WHITE, this.opacity)
 
       if (this.opacity === 0) {
         this.destroy()
