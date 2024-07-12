@@ -2,7 +2,9 @@
 	"name": "kabap",
 	"scripts": {
 		"build": "esbuild --bundle src/main.js --outfile=www/main.js --minify --format=esm",
-		"dev": "esbuild --bundle --sourcemap --keep-names src/main.js --outfile=www/main.js --servedir=www --format=esm",
+		"dev": "esbuild --bundle --sourcemap --keep-names src/main.js --outfile=www/main.js --format=esm",
+		"serve": "npm run dev -- --servedir=www",
+		"watch": "npm run dev -- --watch",
 		"bundle": "npm run build && mkdir -p dist && zip -r dist/game.zip www -x \"**/.DS_Store\"",
 		"deploy": "npm run build && gh-pages -d www"
 	},
