@@ -3,13 +3,13 @@ import { k } from './setup'
 import { spawnShip } from './spawn'
 
 k.scene('start', () => {
-  k.add([k.text('Say arrrrr to start')])
+  k.add([k.text('Say arrrrr')])
   k.onMousePress(() => k.go('main'))
 })
 
 k.scene('main', () => {
   const player = spawnShip([
-    k.pos(k.width() / 2, k.height() / 2),
+    k.pos(k.camPos()),
     k.sprite('ship (1)'),
     'player'
   ])
@@ -38,14 +38,30 @@ k.scene('main', () => {
     }
 
     const edge = k.choose([k.UP, k.RIGHT, k.DOWN, k.LEFT])
-    const pos = k.rand(k.vec2(k.width(), k.height()))
+    const [width, height] = [k.width(), k.height()]
+    const pos = k.rand(k.vec2(width, height))
+
+    switch (edge) {
+      case k.UP:
+        pos.y = 0
+        break
+      case k.RIGHT:
+        pos.x = width
+        break
+      case k.DOWN:
+        pos.y = height
+        break
+      case k.LEFT:
+        pos.x = 0
+    }
 
     const enemy = spawnShip([
-      k.pos(pos.scale(edge)),
       k.sprite('ship (2)'),
-      k.offscreen({ destroy: true, distance: 300 }),
+      k.offscreen({ destroy: true }),
+      k.pos(pos),
       'enemy'
     ])
+    console.log(enemy.pos)
 
     enemy.onUpdate(() => {
       if (!enemy.is(['vanish', 'towards'])) {
