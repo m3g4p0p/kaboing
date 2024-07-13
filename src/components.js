@@ -12,18 +12,19 @@ export function towards (pos) {
     update () {
       const dt = k.dt()
       const destAngle = this.pos.angle(pos) + 90
-      const delta = destAngle - this.angle
-      const distance = pos.sub(this.pos)
+      const deltaAngle = destAngle - this.angle
+      const deltaPos = pos.sub(this.pos)
+      const distance = deltaPos.dist()
       const drift = k.Vec2.fromAngle(this.angle + 90)
 
-      if (distance.dist() < 10) {
+      if (distance < 10) {
         this.unuse('towards')
       }
 
-      this.angle += delta * dt
+      this.angle += deltaAngle * dt
       this.pos = this.pos
-        .add(distance.scale(dt / 2))
-        .add(drift.scale(2))
+        .add(deltaPos.scale(dt / 2))
+        .add(drift.scale(dt * distance / 2))
     }
   }
 }
