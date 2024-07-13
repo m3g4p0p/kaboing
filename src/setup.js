@@ -5,7 +5,7 @@ const data = await loadAtlasData('sprites/ships_sheet.xml')
 
 export const k = window.k = kaplay({
   background: '#006994',
-  scale: 0.7
+  scale: 0.5
 })
 
 k.layers(['below', 'above', 'gui'], 'above')
