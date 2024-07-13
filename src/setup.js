@@ -8,5 +8,5 @@ export const k = window.k = kaplay({
   scale: 0.7
 })
 
-k.layers(['below', 'above'], 'above')
+k.layers(['below', 'above', 'gui'], 'above')
 k.loadSpriteAtlas('sprites/ships_sheet.png', data)

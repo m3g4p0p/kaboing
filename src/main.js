@@ -12,6 +12,13 @@ k.scene('start', () => {
 })
 
 k.scene('main', () => {
+  const score = k.add([
+    k.text(0),
+    k.pos(10, 10),
+    k.fixed(),
+    k.layer('gui')
+  ])
+
   const player = spawnShip([
     k.pos(k.camPos()),
     k.sprite('ship (1)'),
@@ -33,6 +40,10 @@ k.scene('main', () => {
       current.unuse('ship')
       current.use(vanish())
       current.use(k.layer('below'))
+
+      if (current.is('enemy')) {
+        score.text++
+      }
     }
   })
 
