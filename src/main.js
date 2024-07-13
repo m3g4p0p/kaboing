@@ -3,10 +3,17 @@ import { k } from './setup'
 import { spawnShip } from './spawn'
 import { requestFullscreen } from './util'
 
-k.scene('start', () => {
+k.scene('start', (score = 0) => {
   k.add([
     k.text('Say arrrrr'),
     k.pos(10, 10)
+  ])
+
+  k.add([
+    k.text(`Sank ${score} ships`, {
+      size: 24
+    }),
+    k.pos(10, 100)
   ])
 
   k.onMousePress(async () => {
@@ -32,7 +39,7 @@ k.scene('main', () => {
   ])
 
   player.onDestroy(() => {
-    k.go('start')
+    k.go('start', score.text)
   })
 
   score.onUpdate(() => {
