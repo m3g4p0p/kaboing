@@ -4,7 +4,11 @@ import { spawnShip } from './spawn'
 import { requestFullscreen } from './util'
 
 k.scene('start', () => {
-  k.add([k.text('Say arrrrr')])
+  k.add([
+    k.text('Say arrrrr'),
+    k.pos(10, 10)
+  ])
+
   k.onMousePress(async () => {
     await requestFullscreen()
     k.go('main')
@@ -19,6 +23,8 @@ k.scene('main', () => {
     k.layer('gui')
   ])
 
+  const { textSize } = score
+
   const player = spawnShip([
     k.pos(k.camPos()),
     k.sprite('ship (1)'),
@@ -27,6 +33,12 @@ k.scene('main', () => {
 
   player.onDestroy(() => {
     k.go('start')
+  })
+
+  score.onUpdate(() => {
+    if (score.textSize > textSize) {
+      score.textSize -= 0.1
+    }
   })
 
   k.onMousePress(() => {
@@ -45,6 +57,7 @@ k.scene('main', () => {
 
       if (current.is('enemy')) {
         score.text++
+        score.textSize += 10
       }
     }
   })
