@@ -21,7 +21,12 @@ export function towards (pos) {
         this.unuse('towards')
       }
 
-      this.angle += deltaAngle * dt
+      if (Math.abs(deltaAngle) > 180) {
+        this.angle += (deltaAngle - 360) % 360 * dt
+      } else {
+        this.angle += deltaAngle * dt
+      }
+
       this.pos = this.pos
         .add(deltaPos.scale(dt / 2))
         .add(drift.scale(dt * distance / 2))

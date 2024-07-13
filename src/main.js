@@ -30,7 +30,9 @@ k.scene('main', () => {
   })
 
   k.onMousePress(() => {
-    player.use(towards(k.mousePos()))
+    if (player.is('ship')) {
+      player.use(towards(k.mousePos()))
+    }
   })
 
   k.onCollide('ship', 'ship', (a, b) => {
