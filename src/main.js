@@ -52,8 +52,6 @@ k.scene('main', () => {
         enemy.use(towards(player.pos))
       }
     })
-
-    enemy.onDestroy(spawnEnemy)
   })
 })
 
