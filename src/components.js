@@ -5,28 +5,25 @@ import { k } from './setup'
  * @returns {import('kaplay').Comp}
  */
 export function towards (pos) {
-  const start = new k.Vec2()
-
   return {
     id: 'towards',
     require: ['pos', 'rotate'],
-
-    add () {
-      Object.assign(start, this.pos)
-    },
 
     update () {
       const dt = k.dt()
       const destAngle = this.pos.angle(pos) + 90
       const delta = destAngle - this.angle
       const distance = pos.sub(this.pos)
+      const drift = k.Vec2.fromAngle(this.angle + 90)
 
       if (distance.dist() < 10) {
         this.unuse('towards')
       }
 
-      this.pos = this.pos.add(distance.scale(dt / 2))
       this.angle += delta * dt
+      this.pos = this.pos
+        .add(distance.scale(dt / 2))
+        .add(drift.scale(2))
     }
   }
 }
