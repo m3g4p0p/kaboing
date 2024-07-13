@@ -1,4 +1,5 @@
 /* eslint-env browser */
+export const isMobile = 'ontouchstart' in window
 
 /**
  * @param {Element} element
@@ -25,4 +26,13 @@ export async function loadAtlasData (url) {
 
     return { ...carry, [normalized]: props }
   }, {})
+}
+
+export async function requestFullscreen () {
+  if (!isMobile || document.fullscreenElement) {
+    return
+  }
+
+  const canvas = document.querySelector('canvas')
+  await canvas.requestFullscreen().catch(console.error)
 }

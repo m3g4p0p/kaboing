@@ -1,10 +1,14 @@
 import { vanish, towards } from './components'
 import { k } from './setup'
 import { spawnShip } from './spawn'
+import { requestFullscreen } from './util'
 
 k.scene('start', () => {
   k.add([k.text('Say arrrrr')])
-  k.onMousePress(() => k.go('main'))
+  k.onMousePress(async () => {
+    await requestFullscreen()
+    k.go('main')
+  })
 })
 
 k.scene('main', () => {
@@ -61,7 +65,6 @@ k.scene('main', () => {
       k.pos(pos),
       'enemy'
     ])
-    console.log(enemy.pos)
 
     enemy.onUpdate(() => {
       if (!enemy.is(['vanish', 'towards'])) {
