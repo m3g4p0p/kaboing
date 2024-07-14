@@ -43,6 +43,10 @@ k.scene('main', () => {
     k.go('start', score.text)
   })
 
+  player.onUpdate(() => {
+    k.camPos(k.camPos().lerp(player.pos, k.dt() / 2))
+  })
+
   score.onUpdate(() => {
     if (score.textSize > textSize) {
       score.textSize -= 0.1
