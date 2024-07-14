@@ -1,6 +1,7 @@
 import { vanish, towards } from './components'
+import { randomEdge, worldMousePos } from './position'
 import { k } from './setup'
-import { randomEdge, spawnShip } from './spawn'
+import { spawnShip } from './spawn'
 import { requestFullscreen } from './util'
 
 k.scene('start', (score = 0) => {
@@ -50,7 +51,7 @@ k.scene('main', () => {
 
   k.onMousePress(() => {
     if (player.is('ship')) {
-      player.use(towards(k.mousePos()))
+      player.use(towards(worldMousePos()))
     }
   })
 
