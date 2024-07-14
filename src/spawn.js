@@ -20,6 +20,7 @@ export function spawnShip (components) {
     k.opacity(1),
     k.rotate(k.rand(360)),
     'ship',
+    'solid',
     ...components
   ])
 }

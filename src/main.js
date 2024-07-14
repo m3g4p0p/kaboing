@@ -1,7 +1,7 @@
 import { vanish, towards } from './components'
 import { randomEdge, worldMousePos } from './position'
 import { k } from './setup'
-import { spawnShip } from './spawn'
+import { spawnEntity, spawnShip } from './spawn'
 import { requestFullscreen } from './util'
 
 k.scene('start', (score = 0) => {
@@ -55,11 +55,15 @@ k.scene('main', () => {
     }
   })
 
-  k.onCollide('ship', 'ship', (a, b) => {
+  k.onCollide('solid', 'ship', (a, b) => {
     navigator.vibrate(60)
     k.shake(30)
 
     for (const current of [a, b]) {
+      if (!current.is('ship')) {
+        continue
+      }
+
       current.unuse('ship')
       current.use(vanish())
       current.use(k.layer('below'))
@@ -71,7 +75,7 @@ k.scene('main', () => {
     }
   })
 
-  k.loop(1, function spawnEnemy () {
+  k.loop(1, () => {
     if (k.get('enemy').length > 5) {
       return
     }
@@ -88,6 +92,20 @@ k.scene('main', () => {
         enemy.use(towards(player.pos))
       }
     })
+  })
+
+  k.loop(1, () => {
+    if (k.get('rock').length > 3) {
+      return
+    }
+
+    spawnEntity([
+      k.sprite(`rock (${k.randi(1, 6)})`),
+      k.offscreen({ destroy: true }),
+      k.pos(randomEdge()),
+      'rock',
+      'solid'
+    ])
   })
 })
 
