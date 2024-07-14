@@ -106,7 +106,7 @@ k.scene('main', () => {
     spawnEntity([
       k.sprite(`rock (${k.randi(1, 6)})`),
       k.offscreen({ destroy: true }),
-      k.pos(randomEdge()),
+      k.pos(randomEdge(64)),
       'rock',
       'solid'
     ])
