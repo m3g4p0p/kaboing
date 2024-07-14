@@ -10,7 +10,7 @@ k.scene('start', (score = 0) => {
   ])
 
   k.add([
-    k.text(`Sank ${score} ships`, {
+    k.text(`Sank ${score} ships hey ho`, {
       size: 24
     }),
     k.pos(10, 100)

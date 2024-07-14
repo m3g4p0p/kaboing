@@ -1,11 +1,11 @@
 import kaplay from 'kaplay'
-import { loadAtlasData } from './util'
+import { isMobile, loadAtlasData } from './util'
 
 const data = await loadAtlasData('sprites/ships_sheet.xml')
 
 export const k = window.k = kaplay({
   background: '#006994',
-  scale: 0.5
+  scale: isMobile ? 0.5 : 0.7
 })
 
 k.layers(['below', 'above', 'gui'], 'above')
