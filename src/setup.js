@@ -1,7 +1,16 @@
 import kaplay from 'kaplay'
-import { isMobile, loadAtlasData } from './util'
+import { createAtlasData, isMobile, loadAtlasData } from './util'
 
-const data = await loadAtlasData('sprites/ships_sheet.xml')
+const shipAtlasData = await loadAtlasData('sprites/ships_sheet.xml')
+
+const tileAtlasData = createAtlasData({
+  rock: {
+    x: 0,
+    y: 3,
+    cols: 3,
+    rows: 2
+  }
+}, 64)
 
 export const k = window.k = kaplay({
   background: '#006994',
@@ -9,4 +18,5 @@ export const k = window.k = kaplay({
 })
 
 k.layers(['below', 'above', 'gui'], 'above')
-k.loadSpriteAtlas('sprites/ships_sheet.png', data)
+k.loadSpriteAtlas('sprites/ships_sheet.png', shipAtlasData)
+k.loadSpriteAtlas('sprites/tiles_sheet.png', tileAtlasData)

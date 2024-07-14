@@ -13,6 +13,10 @@ function getAttributes (element) {
     }), {})
 }
 
+/**
+ * @param {string} url
+ * @returns {import('kaplay').SpriteAtlasData}
+ */
 export async function loadAtlasData (url) {
   const response = await fetch(url)
   const text = await response.text()
@@ -26,6 +30,34 @@ export async function loadAtlasData (url) {
 
     return { ...carry, [normalized]: props }
   }, {})
+}
+
+/**
+ * @typedef {Object} MappingData
+ * @property {number} x
+ * @property {number} y
+ * @property {number} cols
+ * @property {number} rows
+ * @param {Object<string, MappingData>} mappings
+ * @param {number} width
+ * @param {number} height
+ * @returns {import('kaplay').SpriteAtlasData}
+ */
+export function createAtlasData (mappings, width, height = width) {
+  return Object.entries(mappings).reduce((carry, [name, data]) => ({
+    ...carry,
+    ...Array.from({
+      length: data.cols * data.rows
+    }).reduce((mapping, _, index) => ({
+      ...mapping,
+      [`${name} (${index + 1})`]: {
+        x: (data.x + index % data.cols) * width,
+        y: Math.floor(data.y + index / data.cols) * height,
+        width,
+        height
+      }
+    }), {})
+  }), {})
 }
 
 export async function requestFullscreen () {
