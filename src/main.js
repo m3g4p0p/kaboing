@@ -1,6 +1,6 @@
 import { vanish, towards } from './components'
 import { k } from './setup'
-import { spawnShip } from './spawn'
+import { randomEdge, spawnShip } from './spawn'
 import { requestFullscreen } from './util'
 
 k.scene('start', (score = 0) => {
@@ -75,28 +75,10 @@ k.scene('main', () => {
       return
     }
 
-    const edge = k.choose([k.UP, k.RIGHT, k.DOWN, k.LEFT])
-    const [width, height] = [k.width(), k.height()]
-    const pos = k.rand(k.vec2(width, height))
-
-    switch (edge) {
-      case k.UP:
-        pos.y = 0
-        break
-      case k.RIGHT:
-        pos.x = width
-        break
-      case k.DOWN:
-        pos.y = height
-        break
-      case k.LEFT:
-        pos.x = 0
-    }
-
     const enemy = spawnShip([
       k.sprite('ship (2)'),
       k.offscreen({ destroy: true }),
-      k.pos(pos),
+      k.pos(randomEdge()),
       'enemy'
     ])
 
