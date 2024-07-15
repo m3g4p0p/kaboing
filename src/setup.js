@@ -17,6 +17,6 @@ export const k = window.k = kaplay({
   scale: isMobile ? 0.5 : 0.7
 })
 
-k.layers(['below', 'above', 'gui'], 'above')
+k.layers(['below', 'above', 'ui'], 'above')
 k.loadSpriteAtlas('sprites/ships_sheet.png', shipAtlasData)
 k.loadSpriteAtlas('sprites/tiles_sheet.png', tileAtlasData)

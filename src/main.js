@@ -28,7 +28,7 @@ k.scene('main', () => {
     k.text(0),
     k.pos(10, 10),
     k.fixed(),
-    k.layer('gui')
+    k.layer('ui')
   ])
 
   const { textSize } = score
@@ -69,6 +69,7 @@ k.scene('main', () => {
       }
 
       current.unuse('ship')
+      current.unuse('towards')
       current.use(vanish())
       current.use(k.layer('below'))
 
