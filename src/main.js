@@ -36,6 +36,7 @@ k.scene('main', () => {
   const player = spawnShip([
     k.pos(k.camPos()),
     k.sprite('ship (1)'),
+    { damage: 0 },
     'player'
   ])
 
@@ -66,6 +67,18 @@ k.scene('main', () => {
     for (const current of [a, b]) {
       if (!current.is('ship')) {
         continue
+      }
+
+      if (current.is('player')) {
+        player.damage++
+
+        if (player.damage < 3) {
+          player.use(k.sprite(
+            `ship (${1 + player.damage * 6})`
+          ))
+
+          continue
+        }
       }
 
       current.unuse(k.area())
