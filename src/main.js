@@ -32,6 +32,7 @@ k.scene('main', () => {
   ])
 
   const { textSize } = score
+  let camPos = k.camPos()
 
   const player = spawnShip([
     k.pos(k.camPos()),
@@ -45,7 +46,9 @@ k.scene('main', () => {
   })
 
   player.onUpdate(() => {
-    k.camPos(k.camPos().lerp(player.pos, k.dt() / 2))
+    const wave = k.UP.scale(k.wave(0, 10, k.time()))
+    camPos = camPos.lerp(player.pos, k.dt() / 2)
+    k.camPos(camPos.add(wave))
   })
 
   score.onUpdate(() => {
