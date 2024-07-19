@@ -68,6 +68,7 @@ k.scene('main', () => {
         continue
       }
 
+      current.unuse(k.area())
       current.unuse('ship')
       current.unuse('towards')
       current.use(vanish())

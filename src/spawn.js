@@ -17,6 +17,7 @@ export function spawnEntity (components) {
 export function spawnShip (components) {
   return spawnEntity([
     k.color(k.WHITE),
+    k.layer('above'),
     k.opacity(1),
     k.rotate(k.rand(360)),
     'ship',
