@@ -74,10 +74,17 @@ k.scene('main', () => {
       current.use(vanish())
       current.use(k.layer('below'))
 
-      if (current.is('enemy')) {
-        score.text++
-        score.textSize += 10
+      if (!current.is('enemy')) {
+        continue
       }
+
+      score.text++
+      score.textSize += 10
+
+      current.use(k.sprite(k.choose([
+        'ship (8)',
+        'ship (14)'
+      ])))
     }
   })
 
