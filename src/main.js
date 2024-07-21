@@ -64,7 +64,10 @@ k.scene('main', () => {
   })
 
   k.onCollide('solid', 'ship', (a, b) => {
-    navigator.vibrate(60)
+    if (navigator.vibrate) {
+      navigator.vibrate(60)
+    }
+
     k.shake(30)
 
     for (const current of [a, b]) {
