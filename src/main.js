@@ -2,7 +2,7 @@ import { vanish, towards } from './components'
 import { randomEdge, worldMousePos } from './position'
 import { k } from './setup'
 import { spawnEntity, spawnShip } from './spawn'
-import { requestFullscreen } from './util'
+import { cycleSprite, requestFullscreen } from './util'
 
 k.scene('start', (score = 0) => {
   k.add([
@@ -36,7 +36,7 @@ k.scene('main', () => {
 
   const player = spawnShip([
     k.pos(k.camPos()),
-    k.sprite('ship (1)'),
+    k.sprite('ship (2)'),
     { damage: 0 },
     'player'
   ])
@@ -80,7 +80,7 @@ k.scene('main', () => {
 
         if (player.damage < 3) {
           player.use(k.sprite(
-            `ship (${1 + player.damage * 6})`
+            `ship (${2 + player.damage * 6})`
           ))
 
           continue
@@ -100,10 +100,10 @@ k.scene('main', () => {
       score.text++
       score.textSize += 10
 
-      current.use(k.sprite(k.choose([
-        'ship (8)',
-        'ship (14)'
-      ])))
+      current.use(k.sprite(cycleSprite(
+        current.sprite,
+        k.choose([6, 12])
+      )))
     }
   })
 
@@ -113,7 +113,7 @@ k.scene('main', () => {
     }
 
     const enemy = spawnShip([
-      k.sprite('ship (2)'),
+      k.sprite(`ship (${k.choose([1, 3, 4, 5, 6])})`),
       k.offscreen({ destroy: true }),
       k.pos(randomEdge()),
       'enemy'
