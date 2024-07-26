@@ -1,7 +1,7 @@
 import { vanish, towards } from './components'
-import { randomEdge, worldMousePos } from './position'
+import { randomEdge, worldMousePos } from './math'
 import { k } from './setup'
-import { spawnEntity, spawnShip } from './spawn'
+import { spawnEntity, spawnFlare, spawnShip } from './spawn'
 import { requestFullscreen } from './util'
 
 k.scene('start', (score = 0) => {
@@ -70,6 +70,12 @@ k.scene('main', () => {
 
     k.shake(30)
 
+    spawnFlare(
+      k.lerp(a.pos, b.pos, 0.5),
+      k.choose([a.width, a.height, b.width, b.height]),
+      0.3
+    )
+
     for (const current of [a, b]) {
       if (!current.is('ship')) {
         continue
@@ -101,9 +107,9 @@ k.scene('main', () => {
       score.textSize += 10
 
       current.use(k.sprite(
-        current.sprite.replace(
-          /\((\d+)\)/,
-          (_, i) => `(${(parseInt(i, 10) % 6 || 6) + 18})`)
+        current.sprite.replace(/\((\d+)\)/, (_, i) => {
+          return `(${(parseInt(i, 10) % 6 || 6) + 18})`
+        })
       ))
     }
   })
