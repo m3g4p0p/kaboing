@@ -37,7 +37,7 @@ export function spawnShip (components) {
 export function spawnFlare (pos, radius, duration) {
   const flare = k.add([
     k.circle(0),
-    k.color(k.WHITE),
+    k.color(k.YELLOW),
     k.lifespan(duration),
     k.opacity(1),
     k.pos(pos)
@@ -46,6 +46,7 @@ export function spawnFlare (pos, radius, duration) {
   k.tween(0, 1, duration, value => {
     flare.radius = value * radius
     flare.opacity = 1 - value
+    flare.color.b = value * 255
   }, k.easings.easeOutSine)
 
   return flare
