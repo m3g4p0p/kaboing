@@ -2,7 +2,7 @@ import { vanish, towards } from './components'
 import { randomEdge, worldMousePos } from './position'
 import { k } from './setup'
 import { spawnEntity, spawnShip } from './spawn'
-import { cycleSprite, requestFullscreen } from './util'
+import { requestFullscreen } from './util'
 
 k.scene('start', (score = 0) => {
   k.add([
@@ -100,10 +100,11 @@ k.scene('main', () => {
       score.text++
       score.textSize += 10
 
-      current.use(k.sprite(cycleSprite(
-        current.sprite,
-        k.choose([6, 12])
-      )))
+      current.use(k.sprite(
+        current.sprite.replace(
+          /\((\d+)\)/,
+          (_, i) => `(${(parseInt(i, 10) % 6 || 6) + 18})`)
+      ))
     }
   })
 

@@ -60,18 +60,6 @@ export function createAtlasData (mappings, width, height = width) {
   }), {})
 }
 
-/**
- * @param {string} name
- * @param {number} n
- * @returns {string}
- */
-export function cycleSprite (name, n) {
-  return name.replace(
-    /\((\d+)\)/,
-    (_, i) => `(${parseInt(i, 10) + n})`
-  )
-}
-
 export async function requestFullscreen () {
   if (!isMobile || document.fullscreenElement) {
     return
